@@ -27,7 +27,7 @@ jobs:
         run: zip -r ./module.zip module.json LICENSE README.md CHANGELOG.md ATTRIBUTIONS.md dist/ languages/
 
       - name: Upload Release
-        uses: actions/upload-release-asset@v3
+        uses: actions/upload-release-asset@v2
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./module.zip
