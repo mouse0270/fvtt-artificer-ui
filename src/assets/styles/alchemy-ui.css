@@ -1,0 +1,169 @@
+
+:root {
+	--sidebar-width-collapsed: 32px;
+	--sidebar-left: 0px;
+}
+
+/* Hide Foundry VTT UI */
+#logo, #navigation, #players, #hotbar {
+	display: none;
+}
+
+#app-fvtt-artificer-ui {
+	inset: 0;
+	pointer-events: none;
+	position: fixed;
+	z-index: var(--z-index-ui);
+}
+
+/* Manages Foundry UI - Sidebar */
+/* -- We use body #ID to ensure that the styles are only applied to the Alchemy UI */
+/* -- Controls */
+body #controls {
+	left: var(--sidebar-left);
+	padding: 0.5rem;
+	position: fixed;
+	top: 0px;
+	
+	ol.control-tools.main-controls {
+		margin-right: 0;
+	}
+
+	ol.control-tools > li {
+		align-items: center;
+		backdrop-filter: blur(4px);
+		background-color: rgba(0, 0, 0, 0.3);
+		border-color: rgba(0, 0, 0, 0.3);
+		border-radius: 100px;
+		box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 8px;
+		height: 40px;
+		justify-content: center;
+		margin: 0.25rem 0.5rem;
+		opacity: 1;
+		width: 40px;
+
+		&.active, &:hover {
+			border-color: var(--player-color, var(--color-border-highlight-alt));
+			border-bottom-color: var(--player-color, var(--color-border-highlight-alt));
+			box-shadow: 0 0 10px var(--player-color, var(--color-border-highlight-alt));
+		}
+
+		&.active {
+			background-color: rgba(var(--player-color-rgb), 0.5);
+		}
+
+		> i {
+			font-size: 1rem;
+			color: rgb(255, 255, 255);
+		}
+		> svg {
+			aspect-ratio: 1;
+			fill: rgb(255, 255, 255);
+			height: 1rem;
+		}
+	}
+}
+/* -- Docking */
+html:has(#app-fvtt-artificer-ui[data-controls-dock="bottom"]) body {
+	#controls {
+		bottom: 0px;
+		flex-direction: column-reverse;
+		top: auto;
+
+		ol {
+			flex-direction: row;
+		}
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-controls-dock="right"]) body {
+	#controls {
+		flex-direction: row-reverse;
+		left: auto;
+		right: var(--sidebar-width);
+	}
+	&:has(#sidebar.collapsed) #controls {
+		right: var(--sidebar-width-collapsed);
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-controls-dock="top"]) body {
+	#controls {
+		flex-direction: column;
+
+		ol {
+			flex-direction: row;
+		}
+	}
+}
+/* -- Positioning */
+html:has(#app-fvtt-artificer-ui[data-controls-dock="bottom"]) body,
+html:has(#app-fvtt-artificer-ui[data-controls-dock="top"]) body {
+	#controls {
+		left: var(--sidebar-left);
+		width: calc(100% - var(--sidebar-width) - var(--sidebar-left));	
+	}
+
+	&:has(#sidebar.collapsed) #controls {
+		width: calc(100% - var(--sidebar-width-collapsed) - var(--sidebar-left));
+		left: var(--sidebar-left);
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-controls-dock="left"]) #controls,
+html:has(#app-fvtt-artificer-ui[data-controls-dock="right"]) #controls {
+	height: 100%;	
+}
+html:has(#app-fvtt-artificer-ui[data-controls-position="center"]) #controls {
+	align-items: center;
+}
+html:has(#app-fvtt-artificer-ui[data-controls-position="end"]) #controls {
+	align-items: flex-end;
+}
+/* -- Styles */
+html:has(#app-fvtt-artificer-ui[data-controls-style="rounded"]) #controls ol.control-tools > li {
+	border-radius: 0.25rem;
+}
+html:has(#app-fvtt-artificer-ui[data-controls-style="square"]) #controls ol.control-tools > li {
+	border-radius: 0rem;
+}
+html:has(#app-fvtt-artificer-ui[data-controls-style="pill"][data-controls-dock="left"]) body,
+html:has(#app-fvtt-artificer-ui[data-controls-style="pill"][data-controls-dock="right"]) body {
+	#controls ol.control-tools > li {
+		border-radius: 0px;
+		margin: 0 0.5rem;
+
+		&:first-child {
+			border-top-left-radius: 100px;
+			border-top-right-radius: 100px;
+		}
+		&:last-child {
+			border-bottom-left-radius: 100px;
+			border-bottom-right-radius: 100px;
+		}
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-controls-style="pill"][data-controls-dock="bottom"]) body,
+html:has(#app-fvtt-artificer-ui[data-controls-style="pill"][data-controls-dock="top"]) body {
+	#controls ol.control-tools > li {
+		border-radius: 0px;
+		margin: 0.5rem 0;
+
+		&:first-child {
+			border-bottom-left-radius: 100px;
+			border-top-left-radius: 100px;
+		}
+		&:last-child {
+			border-bottom-right-radius: 100px;
+			border-top-right-radius: 100px;
+		}
+	}
+}
+
+
+/* Manages Foundry UI - Taskbar */
+/* -- This will hide the Foundry VTT Players Widget in favor of the Alchemy UI Players Widget */
+:root:has(#app-fvtt-artificer-ui [data-application-part="taskbar"] [data-id="players"]) #players { 
+	display: none; 
+}
+/* -- This will hide the Foundry VTT Hotbar in favor of the Alchemy UI Hotbar */
+:root:has(#app-fvtt-artificer-ui [data-application-part="taskbar"] [data-id="hotbar"]) #hotbar { 
+	display: none; 
+}

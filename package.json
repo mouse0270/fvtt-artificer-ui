@@ -1,0 +1,30 @@
+{
+  "name": "fvtt-artificer-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.4.47",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^6.1.2",
+    "path": "^0.12.7",
+    "postcss": "^8.4.38",
+    "postcss-mixins": "^10.0.1",
+    "postcss-nested": "^6.0.1",
+    "postcss-nesting": "^12.1.2",
+    "postcss-simple-vars": "^7.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "vite": "^5.2.0"
+  }
+}

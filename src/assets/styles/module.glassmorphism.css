@@ -1,0 +1,70 @@
+html:has(#app-fvtt-artificer-ui[data-theme-glass="true"]) {
+	body {
+		/* Enable Glassmorphism */
+		--ui-background-color-alpha: 0.5; /* Reduce the alpha of the background color */
+		--ui-Glassmorphism: 20px; /* Set the Glassmorphism effect */
+	}
+
+	#sidebar-tabs, .tab[data-tab] {
+		backdrop-filter: blur(var(--ui-Glassmorphism));
+	}
+
+	&:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="true"]) {
+		#chat {
+			backdrop-filter: none;
+		}
+	}
+
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"]) {
+		#chat {
+			
+			background: linear-gradient(to right, hsla(var(--sidebar-background-hsl), 0.5), transparent);
+
+			#chat-log {
+				.message {
+					backdrop-filter: blur(var(--ui-Glassmorphism));
+				}
+			}
+
+			#chat-form {
+				backdrop-filter: blur(var(--ui-Glassmorphism));
+				background-image: none;
+				border-radius: 0.5rem;
+				height: auto;
+				flex: 0 0 auto;
+				margin: 0.5rem;
+			}
+		}
+		&:has(#app-fvtt-artificer-ui[data-sidebar-chat-autohide="true"]) #chat {
+			opacity: 1; /* Set the Opacity to 1 as it Doesn't work with Backdrop Filter */
+		}
+	}
+
+	&:has(#app-fvtt-artificer-ui:not([data-controls-style="default"])) {
+	
+		#controls ol.control-tools > li {
+			backdrop-filter: blur(var(--ui-Glassmorphism));
+		}
+	}
+
+	/* System Specific */
+	/* -- D&D5e */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"]) body.system-dnd5e #sidebar {
+		#chat {
+			#chat-log {
+				.message {
+					.dnd5e2 {
+						--ui-background-color-alpha: 0.5;
+						&.chat-card .description {
+							backdrop-filter: blur(var(--ui-Glassmorphism));
+						}
+						button {
+							backdrop-filter: blur(var(--ui-Glassmorphism));
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

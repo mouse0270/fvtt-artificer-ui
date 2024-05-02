@@ -1,0 +1,49 @@
+html:has(body.system-dsa5) {
+	--ui-dsa5-chat-color: #191815;
+	
+	/* Sidebar */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) #sidebar {
+		#chat #chat-log .message {
+			color: inherit;
+			.message-header, .message-content {
+				color: var(--ui-dsa5-chat-color);
+			}
+		}
+	}
+
+	/* DSA5-IMMERSIVE - SIDEBAR*/
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) body.dsa5-immersive  {
+		#sidebar {
+			&:before {
+				bottom: auto;
+				height: 100vh;
+				left: auto;
+				top: 0px;
+				width: calc(var(--sidebar-width) + var(--sidebar-width-collapsed) + 15px);
+			}
+			&:hover:before {
+				right: 0px;
+			}
+		}
+
+		&:has(#app-fvtt-artificer-ui[data-sidebar-autohide="true"]) {
+			#sidebar {
+				&:before {
+					right: calc((var(--sidebar-width)) * -1);
+					transition: right 0.5s;
+					transition-delay: 1.5s;
+				}
+
+				&:hover:before {
+					right: 0px;
+					transition-delay: 0s;
+				}
+			}
+		}
+	}
+
+	/* Sidebar - Switch to D&D Logo */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) #sidebar #sidebar-tabs:before {
+		background-image: url(/systems/dsa5/icons/dsalist.webp);
+	}
+}

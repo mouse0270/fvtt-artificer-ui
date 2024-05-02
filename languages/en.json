@@ -1,0 +1,162 @@
+{
+	"fvtt-artificer-ui": {
+		"title": "Artificer UI",
+		"taskbar": {
+			"components": {
+				"players": {
+					"showOfflinePlayers": "Show Offline Players",
+					"hideOfflinePlayers": "Hide Offline Players"
+				}
+			} 
+		},
+
+		"CHAT": {
+			"Message": {
+				"Placeholder": "Type a message...",
+				"Character": "Message from {name}"
+			}
+		},
+
+		"SETTINGS": {
+			"HEADERS": {
+				"Theme": "Theme Settings",
+				"Sidebar": "Sidebar Settings",
+				"SidebarChat": "Sidebar - Chat Settings",
+				"Controls": "Controls Settings",
+				"Widgets": "Widgets Settings"
+			},
+			"Shared": {
+				"Enabled": {
+					"Name": "Enable World Artificer UI",
+					"Hint": "This will disable client-side Artificer UI settings and enable the World Artificer UI settings. This will allow the GM to set the Artificer UI settings for all players in the world. If disabled, the client-side settings will be used.",
+					"Warning": "The settings for this module are being controlled by the GM. If you wish to change these settings, please contact your GM."
+				}
+			},
+			"Theme": {
+				"Glass": {
+					"Name": "Enable Glassmorphism",
+					"Hint": "Enable the glassmorphism theme. This will make the UI elements transparent and blur the background. WARNING: This may cause performance issues on some systems.",
+					"Opacity": {
+						"Name": "Glassmorphism Opacity",
+						"Hint": "Set the opacity of the glassmorphism effect. This will make the UI elements more or less transparent."
+					},
+					"Blur": {
+						"Name": "Glassmorphism Blur",
+						"Hint": "Set the blur of the glassmorphism effect. This will make the background more or less blurry."
+					}
+				},
+				"Color": {
+					"Name": "Theme Color",
+					"Hint": "This will override the light/dark theme colors with a custom color. This will affect all UI elements enabled for use with Artificer UI. Please note to return to default, just clear the input field."
+				}
+			},
+			"Sidebar": {
+				"Enabled": {
+					"Name": "Enable Sidebar Modifications",
+					"Hint": "Enable modifications to the sidebar."
+				},
+				"Theme": {
+					"Name": "Enable Artificer UI Sidebar Theme",
+					"Hint": "This will apply the Artificer UI theme to the sidebar. This will override the default Foundry/System theme for the sidebar.",
+					"Choices": {
+						"Default": "Default",
+						"Dark": "Dark",
+						"Light": "Light"
+					}
+				},
+				"AutoHide": {
+					"Name": "Automatically Hide the Sidebar",
+					"Hint": "This will cause the sidebar to automatically slide out of view when not active. On hover, it will slide back into view."
+				},
+				"DefaultTab": {
+					"Name": "The Default Sidebar Tab on Render",
+					"Hint": "Choose the default tab that should be opened when the sidebar is rendered."
+				},
+				"Chat": {
+					"Enabled": {
+						"Name": "Enable Popout Chat",
+						"Hint": "This will popout the chat and dock it to the left of the screen."
+					},
+					"AutoHide": {
+						"Name": "Automatically Hide the Chat",
+						"Hint": "This will cause the chat to automatically slide out of view when not active. On hover, it will slide back into view.",
+						"NewChat": {
+							"Name": "Show Chat On New Messages",
+							"Hint": "When a new message is recieved, tha chat will automatically slide into view."
+						},
+						"Combat": {
+							"Name": "Show Chat In Combat",
+							"Hint": "When combat starts, the chat will automatically slide into view."
+						}
+					}
+				}
+			},
+			"Controls": {
+				"Enabled": {
+					"Name": "Enable Controls",
+					"Hint": "Enable the controls for the sidebar."
+				},
+				"HideLogo": {
+					"Name": "Hide Logo",
+					"Hint": "It is recommended to hide the logo if you are docking the controls to the top of the screen. As Systems change this logo, it may not always be the same size or shape. Making it hard to dock the controls around the logo."
+				},
+				"Dock": {
+					"Name": "Dock Controls To",
+					"Hint": "Choose where the controls should be docked.",
+					"Choices": {
+						"Bottom": "Bottom",
+						"Left": "Left",
+						"Right": "Right",
+						"Top": "Top"
+					}
+				},
+				"Position": {
+					"Name": "Position",
+					"Hint": "Choose the position of the controls.",
+					"Choices": {
+						"Start": "Start",
+						"Center": "Center",
+						"End": "End"
+					}
+				},
+				"Style": {
+					"Name": "Style",
+					"Hint": "Choose the style of the controls.",
+					"Choices": {
+						"Default": "Default",
+						"Circle": "Circle",
+						"Square": "Square",
+						"Rounded": "Rounded",
+						"Pill": "Pill"
+					}
+				}
+			},
+			"Widgets": {
+				"Players": {
+					"Enabled": {
+						"Name": "Enable Player Widget",
+						"Hint": "This will enable the custom Player List widget for Artificer UI."
+					}
+				},
+				"Scene": {
+					"Enabled": {
+						"Name": "Enable Scene Widget",
+						"Hint": "This will enable the custom Scene List widget for Artificer UI."
+					}
+				},
+				"Hotbar": {
+					"Enabled": {
+						"Name": "Enable Hotbar Widget",
+						"Hint": "This will enable the custom Hotbar widget for Artificer UI."
+					}
+				},
+				"Sheets": {
+					"Enabled": {
+						"Name": "Enable Sheets Widget",
+						"Hint": "This will show opened windows in the Artificer UI Taskbar. Similar to using the Taskbar in Windows for switching between open applications."
+					}
+				}
+			}
+		}
+	}
+}

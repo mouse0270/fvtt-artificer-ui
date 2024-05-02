@@ -1,0 +1,165 @@
+@keyframes scaleUpAnimation {
+	from { scale: 0; }
+	to { scale: 1; }
+  }
+
+/* Enable Sidebar Chat Popout */
+html:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="true"]) {
+	#sidebar {
+		#sidebar-tabs .item[data-tab="chat"] {
+			display: none !important;
+		}
+
+		#chat {
+			background-color: transparent;
+			box-shadow: none;
+			display: flex;
+			height: 100vh;
+			left: 0px;
+			opacity: 1;
+			position: fixed;
+			right: auto;
+			width: calc(var(--sidebar-width));
+
+			#chat-log {
+				direction: rtl;
+				display: flex;
+				flex-direction: column;
+				height: auto;
+				justify-content: flex-start;
+				overflow-y: auto;
+
+				li {
+					direction: ltr;
+					text-align: left;
+				}
+
+				li:first-child {
+					margin-top: auto;
+				}
+
+				li.new-chat {
+					animation: scaleUpAnimation 0.5s ease forwards;
+					transform-origin: bottom center;
+				}
+			}
+
+			#chat-form {
+				background: url(/ui/parchment.jpg) repeat;
+				border-radius: 0.5rem;
+				height: auto;
+				flex: 0 0 auto;
+				margin: 0.5rem;
+
+				textarea {
+					background: none;
+					border-width: 0px;
+					display: block;
+					box-sizing: unset;
+					field-sizing: content;
+					font-size: var(--font-size-16);
+					overflow: hidden;
+					max-width: calc(var(--sidebar-width) - 3rem);
+					min-height: auto;
+					padding: 1rem 1rem;
+				}
+			}
+		}
+
+		&.collapsed {
+			#chat.tab[data-tab] {
+				pointer-events: all;
+			}
+		}
+	}
+
+	&:has(#app-fvtt-artificer-ui[data-sidebar-chat-autohide="true"]) #sidebar #chat {
+		left: calc((var(--sidebar-width) * -1) + 2rem);
+		opacity: 0.3;
+		pointer-events: none;
+		transition: left 0.5s, opacity 0.5s;
+		transition-delay: 1.5s;
+
+		&:hover, &:focus-within {
+			left: 0px;
+			opacity: 1;
+			transition-delay: 0s;
+		}
+		
+		#chat-log .message, .jumpt-to-bottom, #chat-controls, #chat-form {
+			pointer-events: all;
+		}
+	}
+	&:has(#app-fvtt-artificer-ui[data-sidebar-chat-autohide="true"][data-sidebar-chat-autohide-newchat="true"]) #sidebar {
+		#chat:has(.chat-message.new-chat) {
+			left: 0px;
+			opacity: 1;
+			transition-delay: 0s;
+		}
+	}
+	
+	&:has(#app-fvtt-artificer-ui[data-sidebar-chat-autohide="true"][data-sidebar-chat-autohide-combat="true"]) #sidebar {
+		#chat {
+			left: 0px;
+			opacity: 1;
+			transition-delay: 0s;
+		}
+	}
+}
+
+/* Apply Styles to Sidebar if Sidebar Styles is Enabled and Sidebar is Popout */
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"]) #sidebar {
+	#chat {
+		#chat-log {
+			padding: 0.5rem;
+			gap: 0.5rem;
+		}
+	}
+}
+
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"][data-sidebar-theme="true"]) #sidebar {
+	#chat {
+		#chat-log {
+			.message {
+				background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+				background-image: none;
+				border-width: 0px;
+				color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+
+				.message-header {
+					color: inherit;
+
+					time {
+						--ui-foreground-color-alpha: 0.7;
+						color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha))
+					}
+				}
+			}
+		}
+		
+
+		#chat-form {
+			background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+			background-image: none;
+			border-width: 0px;
+			color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+
+			textarea {
+				color: inherit;
+			}
+		}
+	}
+}
+
+/* Move Players / FPS / Hotbar to the left if Sidebar Chat is Popout */
+html:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="true"][data-sidebar-chat-autohide="false"]) {
+	#ui-left {
+		margin-left: calc(var(--sidebar-width));
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="true"][data-sidebar-chat-autohide="true"]) {
+	#ui-left {
+		margin-left: 2rem;
+	}
+}
+

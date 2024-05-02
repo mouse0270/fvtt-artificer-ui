@@ -1,0 +1,197 @@
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) #sidebar {	
+	--sidebar-background-hsl: var(--ui-background-color-hue), var(--ui-background-color-saturation), var(--ui-background-color-lightness);
+	--sidebar-foreground-hsl: var(--ui-foreground-color-hue), var(--ui-foreground-color-saturation), var(--ui-foreground-color-lightness);
+	height: 100vh !important;
+	margin: 0px;
+	padding-right: 50px;
+	transition: width 0.5s;
+	transition-delay: 1.5s;
+	width: calc(var(--sidebar-width) + var(--sidebar-width-collapsed));
+
+	&:hover {
+		transition-delay: 0s;
+	}
+
+	&.collapsed {
+		margin-right: -50px;
+		transition: margin 0.5s;
+		transition-delay: 1.5s;
+		width: 0 !important;
+
+		#sidebar-tabs {
+			border-radius: 0.5rem;
+			box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
+				0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
+				0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
+			
+			right: calc(var(--sidebar-width-collapsed) * -1);
+			transition: right 0.5s;
+			transition-delay: 1.5s;
+
+			.item.active {
+				border-bottom: 1px solid var(--ui-accent-color, var(--color-border-highlight-alt));
+				border-radius: 0.5rem;
+			}
+		}
+		
+
+		&:hover {
+			margin-right: 0px;
+			transition-delay: 0s;
+			
+			#sidebar-tabs { 
+				right: 0px;
+				transition-delay: 0s;
+			}
+		}
+
+		.tab[data-tab], .tab[data-tab].active {
+			opacity: 0;
+			pointer-events: none;
+			z-index: -1;
+		}
+	}
+
+	#sidebar-tabs {
+		--sidebar-tab-width: var(--sidebar-width-collapsed);
+
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		height: 100%;
+		justify-content: flex-start;
+		padding: 0.25rem;
+		padding-top: calc(var(--sidebar-width-collapsed) + 0.25rem);
+		position: fixed;
+		right: 0;
+		width: var(--sidebar-width-collapsed);
+		z-index: 10;
+
+		&:before {
+			content: "";
+			background-image: url(/icons/vtt.png);
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			position: absolute;
+			height: calc(var(--sidebar-width-collapsed) - 1rem);
+			width: calc(var(--sidebar-width-collapsed) - 1rem);
+			top: 0.5rem;
+			right: 0.5rem;
+		}
+
+		.item {
+			align-items: center;
+			display: flex;
+			flex: 0 0 auto;
+			height: calc(var(--sidebar-width-collapsed) - 0.5rem);
+			justify-content: center;
+
+			&.active {
+				border-bottom-width: 1px;
+    			border-bottom-style: solid;
+			}
+		}
+
+		.collapse {
+			align-items: center;
+			background-color: rgba(var(--ui-accent-color-rgb), 0.5);
+			border-color: var(--ui-accent-color, var(--color-border-highlight-alt));
+			border-radius: 50%;
+			color: white;
+			display: flex;
+			height: calc(var(--sidebar-width-collapsed)  / 2);
+			justify-content: center;
+			left: calc(var(--sidebar-width-collapsed)  / 2);
+			position: absolute;
+			top: calc(var(--sidebar-width-collapsed)  / 2);
+			transform: translate(-150%, -50%);
+			width: calc(var(--sidebar-width-collapsed)  / 2);
+			z-index: 1;
+		}
+	}
+
+	.tab[data-tab] {
+		display: flex;
+		flex-direction: column;
+		opacity: 0;
+		position: fixed;
+		height: 100vh;
+		right: var(--sidebar-width-collapsed);
+		transition: opacity 0.5s, ;
+		width: calc(var(--sidebar-width));
+		z-index: -1;
+
+		&.active {
+			opacity: 1;
+			z-index: 5;
+		}
+	}
+}
+
+/* Enable Artificer UI - Styles */
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-theme="true"]) body #sidebar {
+	background-image: none;
+	border-width: 0px;
+	box-shadow: none;
+	color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+
+	#sidebar-tabs {
+		background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+		background-image: none;
+		border-radius: 0px;
+		border-width: 0px;
+		box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
+			0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
+			0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
+
+		.item {
+			&.active {
+				background-color: rgba(var(--ui-accent-color-rgb), 0.5);
+				border-color: var(--ui-accent-color, var(--color-border-highlight-alt));
+				border-bottom: 1px solid var(--ui-accent-color, var(--color-border-highlight-alt));
+				border-radius: 0.5rem;
+				box-shadow: 0 0 10px var(--ui-accent-color, var(--color-border-highlight-alt));
+				text-shadow: none;
+			}
+
+			&:hover {
+				border-color: var(--ui-accent-color, var(--color-border-highlight-alt));
+				border-radius: 0.5rem;
+				box-shadow: 0 0 10px var(--ui-accent-color, var(--color-border-highlight-alt));
+				text-shadow: none;
+			}
+		}
+	}
+
+	.tab[data-tab] {
+		background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+		background-image: none;
+		border-radius: 0px;
+		border-width: 0px;
+		box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
+			0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
+			0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
+	}
+}
+
+/* Enable Auto-Collapse */
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-autohide="true"]) body #sidebar {
+	width: calc(var(--sidebar-width-collapsed));
+
+	.tab[data-tab] {
+		right: calc(var(--sidebar-width) * -1);
+		transition: right 0.5s;
+		transition-delay: 1.5s;
+	}
+
+	&:hover {
+		width: calc(var(--sidebar-width) + var(--sidebar-width-collapsed));
+
+		.tab[data-tab] {
+			right: var(--sidebar-width-collapsed);
+			transition-delay: 0s;
+		}
+	}
+}

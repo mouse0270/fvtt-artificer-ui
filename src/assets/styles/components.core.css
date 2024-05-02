@@ -1,0 +1,20 @@
+/* Players Widget */
+html:has(#app-fvtt-artificer-ui .taskbar-wrapper[data-id="players"]) {
+	#players {
+		display: none !important;
+	}
+}
+
+/* Scenes Widget */
+html:has(#app-fvtt-artificer-ui .taskbar-wrapper[data-id="scenes"]) {
+	#navigation {
+		display: none !important;
+	}
+}
+
+/* Hotbar Widget */
+html:has(#app-fvtt-artificer-ui .taskbar-wrapper[data-id="hotbar"]) {
+	#hotbar {
+		display: none !important;
+	}
+}

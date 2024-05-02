@@ -1,0 +1,8 @@
+/* This is a comment - File */
+#alchemy-ui {
+  --blur: 4px;
+
+  .taskbar {
+	--blur: 8px;
+  }
+}

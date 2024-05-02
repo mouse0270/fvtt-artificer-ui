@@ -1,0 +1,36 @@
+/* DEFINE SETTINGS */
+:root {
+	--ui-accent-color-rgb: 255, 100, 0;
+	--ui-accent-color: var(--color-border-highlight);
+	/* Setup the background color */
+	--ui-background-color-hue: 242;
+	--ui-background-color-saturation: 25%;
+	--ui-background-color-lightness: 15%;
+	--ui-background-color-alpha: 0.9;
+	/* Setup the foreground color */
+	--ui-foreground-color-hue: 0;
+	--ui-foreground-color-saturation: 0%;
+	--ui-foreground-color-lightness: 100%;
+	--ui-foreground-color-alpha: 1;
+}
+
+body.theme-light {
+	/* Setup the background color */
+	--ui-background-color-hue: 240;
+	--ui-background-color-saturation: 89%;
+	--ui-background-color-lightness: 96%;
+	/* Setup the foreground color */
+	--ui-foreground-color-hue: 0;
+	--ui-foreground-color-saturation: 0%;
+	--ui-foreground-color-lightness: 0%;
+}
+
+html body {
+	--sidebar-width: 300px;
+	--sidebar-width-collapsed: 0px;
+}
+
+html body:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) {
+	--sidebar-width-collapsed: 50px;
+}
+

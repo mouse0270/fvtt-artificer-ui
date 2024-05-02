@@ -1,0 +1,70 @@
+html:has(body.system-dnd5e) {
+	/* Theme Glassmorphism */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"])  #sidebar {
+		#chat {
+			#chat-log {
+				.message {
+					.dnd5e2 {
+						--ui-background-color-alpha: 0.5;
+						&.chat-card .description {
+							backdrop-filter: blur(var(--ui-Glassmorphism));
+						}
+						button {
+							backdrop-filter: blur(var(--ui-Glassmorphism));
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/* Sidebar - Switch to D&D Logo */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) #sidebar #sidebar-tabs:before {
+		background-image: url(/systems/dnd5e/ui/official/ampersand.svg);
+	}
+	
+	/* Sidebar - Chat */
+	&:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-chat-enabled="true"]) #sidebar {
+		#chat {
+			#chat-log {
+				.message {
+					&:before {
+						background-image: none;
+					}
+	
+					.message-header {
+						.title {
+							color: inherit;
+						}
+						.subtitle {
+							--ui-foreground-color-alpha: 0.7;
+							color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha))
+						}
+					}
+	
+					.dnd5e2 {
+						--ui-background-color-alpha: 0.9;
+						--icon-fill: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+						.name-stacked .subtitle {
+							--ui-foreground-color-alpha: 0.7;
+							color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+						}
+						&.chat-card .description {
+							background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+							color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+						}
+						button {
+							background-color: hsla(var(--sidebar-background-hsl), var(--ui-background-color-alpha));
+							color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+						}
+						.pills .pill.pill-sm {
+							--ui-foreground-color-alpha: 0.7;
+							color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+							border-color: hsla(var(--sidebar-foreground-hsl), var(--ui-foreground-color-alpha));
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+html:has(#app-fvtt-artificer-ui[data-theme-foundry-applicationv2="true"]) {
+	.application {
+		--application-background-hsl: var(--ui-background-color-hue), var(--ui-background-color-saturation), var(--ui-background-color-lightness);
+		--application-foreground-hsl: var(--ui-foreground-color-hue), var(--ui-foreground-color-saturation), var(--ui-foreground-color-lightness);
+		
+		background-color: hsla(var(--application-background-hsl), var(--ui-background-color-alpha));
+		background-image: none;
+		border: 1px solid var(--color-fieldset-border);
+		color: hsla(var(--application-foreground-hsl), var(--ui-foreground-color-alpha));
+
+		.window-header {
+			--ui-background-color-alpha: 0.9;
+			--application-background-hsl: var(--ui-background-color-hue), var(--ui-background-color-saturation), var(--ui-background-color-lightness);
+
+			background-color: hsla(var(--application-background-hsl), var(--ui-background-color-alpha));
+			background-image: none;
+			border-width: 0px;
+			border-bottom: 1px solid var(--color-fieldset-border);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			color: hsla(var(--application-foreground-hsl), var(--ui-foreground-color-alpha));
+		}
+
+		.standard-form fieldset legend {
+			--ui-foreground-color-alpha: 0.8;
+			color: hsla(var(--application-foreground-hsl), var(--ui-foreground-color-alpha));
+		}
+		.standard-form .form-group > label {
+			color: hsla(var(--application-foreground-hsl), var(--ui-foreground-color-alpha));
+		}
+		.standard-form .hint {
+			--ui-foreground-color-alpha: 0.8;
+			color: hsla(var(--application-foreground-hsl), var(--ui-foreground-color-alpha));
+		}
+	}
+	
+	&:has(#app-fvtt-artificer-ui[data-theme-glass="true"]) { 
+		.application {
+			backdrop-filter: blur(var(--ui-Glassmorphism));
+		}
+	}
+}
