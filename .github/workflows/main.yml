@@ -56,29 +56,36 @@ jobs:
         uses: jossef/action-set-json-field@v2.1
         with:
           file: module.json
-          field: download
+          field: readme
           value: "https://github.com/${{github.repository}}/blob/master/README.md"
           
       - name: Set Module ChangeLog
         uses: jossef/action-set-json-field@v2.1
         with:
           file: module.json
-          field: download
+          field: changelog
           value: "https://raw.githubusercontent.com/${{github.repository}}/master/CHANGELOG.md"
           
       - name: Set Module License
         uses: jossef/action-set-json-field@v2.1
         with:
           file: module.json
-          field: download
+          field: license
           value: "https://github.com/mouse0270/${{github.repository}}/blob/master/LICENSE"
           
       - name: Set Module Issues URL
         uses: jossef/action-set-json-field@v2.1
         with:
           file: module.json
-          field: download
+          field: bugs
           value: "https://github.com/${{github.repository}}/issues"
+
+      - name: Disable Module Debug Logger
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: flags.logger.enabled
+          value: false
         
       - name: Create Release
         run: zip -r ./module.zip module.json LICENSE README.md CHANGELOG.md ATTRIBUTIONS.md dist/ languages/
