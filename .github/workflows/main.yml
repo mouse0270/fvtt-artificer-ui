@@ -23,6 +23,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Set Module Verion
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: version
+          value: ${{ github.event.release.tag_name }}
+
       - name: Create Release
         run: zip -r ./module.zip module.json LICENSE README.md CHANGELOG.md ATTRIBUTIONS.md dist/ languages/
 
@@ -31,5 +38,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ./module.zip
+          files: |
+            ./module.zip
+            module.json
         
