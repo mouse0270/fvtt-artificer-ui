@@ -30,6 +30,56 @@ jobs:
           field: version
           value: ${{ github.event.release.tag_name }}
 
+      # Update Other Fields Here
+      - name: Set Module Repository
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: url
+          value: https://github.com/${{github.repository}}
+
+      - name: Set Module Manifest
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: manifest
+          value: https://github.com/${{github.repository}}/releases/latest/download/module.json
+          
+      - name: Set Module Download
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip
+          
+      - name: Set Module Readme
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: "https://github.com/${{github.repository}}/blob/master/README.md"
+          
+      - name: Set Module ChangeLog
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: "https://raw.githubusercontent.com/${{github.repository}}/master/CHANGELOG.md"
+          
+      - name: Set Module License
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: "https://github.com/mouse0270/${{github.repository}}/blob/master/LICENSE"
+          
+      - name: Set Module Issues URL
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: "https://github.com/${{github.repository}}/issues"
+        
       - name: Create Release
         run: zip -r ./module.zip module.json LICENSE README.md CHANGELOG.md ATTRIBUTIONS.md dist/ languages/
 
