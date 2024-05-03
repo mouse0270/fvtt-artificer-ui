@@ -127,10 +127,24 @@ html:has(#app-fvtt-artificer-ui[data-controls-enabled="true"]) {
 				}
 			}
 
-			&:has(#sidebar:hover) {
-				#controls {
-					right: calc(var(--sidebar-width) + var(--sidebar-width-collapsed) + 1rem);
-					transition-delay: 0s;
+			
+			&:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="true"]) {
+				&:has(#sidebar:hover) {
+					&:has(#chat:not(:hover)) {
+						#controls {
+							right: calc(var(--sidebar-width) + var(--sidebar-width-collapsed) + 1rem);
+							transition-delay: 0s;
+						}
+					}
+				}
+			}
+			
+			&:has(#app-fvtt-artificer-ui[data-sidebar-chat-enabled="false"]) {
+				&:has(#sidebar:hover) {
+					#controls {
+						right: calc(var(--sidebar-width) + var(--sidebar-width-collapsed) + 1rem);
+						transition-delay: 0s;
+					}
 				}
 			}
 	

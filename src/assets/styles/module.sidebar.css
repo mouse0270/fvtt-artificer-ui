@@ -177,7 +177,25 @@ html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-theme=
 }
 
 /* Enable Auto-Collapse */
-html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-autohide="true"]) body #sidebar {
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-autohide="true"][data-sidebar-chat-enabled="true"]) body #sidebar {
+	width: calc(var(--sidebar-width-collapsed));
+
+	.tab[data-tab] {
+		right: calc(var(--sidebar-width) * -1);
+		transition: right 0.5s;
+		transition-delay: 1.5s;
+	}
+
+	&:not(:has(#chat:hover)):hover {
+		width: calc(var(--sidebar-width) + var(--sidebar-width-collapsed));
+
+		.tab[data-tab] {
+			right: var(--sidebar-width-collapsed);
+			transition-delay: 0s;
+		}
+	}
+}
+html:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"][data-sidebar-autohide="true"][data-sidebar-chat-enabled="false"]) body #sidebar {
 	width: calc(var(--sidebar-width-collapsed));
 
 	.tab[data-tab] {
