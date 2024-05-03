@@ -4,18 +4,18 @@
 			<div class="taskbar-item" style="position: relative;">
 				<svg-icon type="mdi" :path="mdiMapLegend"></svg-icon>
 				<ul :class="`taskbar-menu ${showScenes ? 'show' : 'hide'}`">
-					<li v-for="scene in scenes" :key="scene.id" :data-scene-id="scene.id" :style="`background-image: url(${scene.thumb})`">
+					<li v-for="scene in scenes" :key="scene.id" :data-scene-id="scene.id" :class="{active: scene.id == currentScene.id}" :style="`background-image: url(${scene.thumb})`">
 						<div class="taskbar-menu-item">
 							<div class="title" :data-tooltip="localize('SCENES.View')" @click="ViewScene(scene)">
 								<svg-icon v-if="scene.active" type="mdi" :path="mdiMapMarker"></svg-icon>
 								{{ localize(scene.name) }}
 							</div>
 							<div class="actions" v-if="isGM">
-								<svg-icon v-if="scene.id !== currentScene.id" :data-tooltip="localize('SCENES.Activate')" type="mdi" :path="mdiPlayCircle" @click="() => ActivateScene(scene)"></svg-icon>
+								<svg-icon v-if="scene.id !== activeScene.id" :data-tooltip="localize('SCENES.Activate')" type="mdi" :path="mdiPlayCircle" @click="() => ActivateScene(scene)"></svg-icon>
 								<svg-icon type="mdi" :data-tooltip="localize('SCENES.Configure')" :path="mdiCog" @click="() => ConfigureScene(scene)"></svg-icon>
 								<svg-icon v-if="HasNotes(scene)" type="mdi" :data-tooltip="localize('SCENES.Notes')" :path="mdiNotebook" @click="() => SceneNotes(scene)"></svg-icon>
 								<svg-icon type="mdi" :data-tooltip="localize('SCENES.Preload')" :path="mdiProgressDownload" @click="PreloadScene(scene)"></svg-icon>
-								<svg-icon v-if="scene.id !== currentScene.id" :data-tooltip="localize('SCENES.ToggleNav')" type="mdi" :path="mdiEyeOff" @click="ToggleScene(scene)"></svg-icon>
+								<svg-icon v-if="scene.id !== activeScene.id" :data-tooltip="localize('SCENES.ToggleNav')" type="mdi" :path="mdiEyeOff" @click="ToggleScene(scene)"></svg-icon>
 								<svg-icon v-if="(scene?.contextMenuOptions?.length ?? 0) > 0" :data-tooltip="localize('MORE')" :data-scene-id="scene.id" type="mdi" :path="mdiDotsVertical" @click="() => contextMenu(scene)"></svg-icon>
 							</div>
 						</div>
@@ -37,20 +37,23 @@ import { logger as l } from '@logger';
 const isGM = ref(game.user.isGM);
 const showScenes = ref(false);
 const currentScene = ref(canvas.scene);
+const activeScene = ref(game?.scenes?.find(s => s.active) ?? false);
 const scenes = ref(game.scenes.filter(s => {
 	return (s.navigation && s.visible) || s.active || s.isView;
 }).sort((a, b) => a.navOrder - b.navOrder))
 
 const updateScenes = () => {
-	scenes.value = game.scenes.filter(scene => {
+	const getScenes = game.scenes.filter(s => {
+		return (s.navigation && s.visible) || s.active || s.isView;
+	}).sort((a, b) => a.navOrder - b.navOrder);
+	getScenes.forEach(scene => {
 		const element = document.querySelector(`#navigation #scene-list li.scene[data-scene-id="${scene.id}"]`);
 		scene.contextMenuOptions = element ? ContextOptions.value.filter(option => typeof option.condition === 'function' ? option.condition($(element)) : option.condition) : [];
-
-		return scene;
-
-		//return (s.navigation && s.visible) || s.active || s.isView;
-	}).sort((a, b) => a.navOrder - b.navOrder);
-	currentScene.value = game.scenes.find(s => s.active) ?? canvas.scene;
+	});
+	
+	scenes.value = getScenes;
+	currentScene.value = canvas.scene;
+	activeScene.value = game?.scenes?.find(s => s.active) ?? canvas.scene;
 	l.log('Update Scenes |', scenes.value, currentScene.value);
 }
 
@@ -75,7 +78,6 @@ const ViewScene = (scene) => {
 const ActivateScene = (scene) => {
 	l.log('Activate Scene |', scene);
 	game.scenes.get(scene.id).activate();
-	//currentScene.value = game.scenes.get(scene.id);
 }
 
 const ConfigureScene = (scene) => {
@@ -139,7 +141,10 @@ const ContextOptions = computed(() => {
 onMounted(() => {
 	l.log('Scenes Taskbar Mounted');
 
+	Hooks.on('canvasReady', updateScenes);
+	Hooks.on('createScene', updateScenes);
 	Hooks.on('updateScene', updateScenes);
+	Hooks.on('deleteScene', updateScenes);
 
 	updateScenes();
 
@@ -175,6 +180,10 @@ onUnmounted(() => {
 	display: block;
 	inset: 0;
 	position: absolute;
+}
+.taskbar-menu li.active {
+	border: 2px solid var(--player-color, var(--color-border-highlight-alt));
+    box-shadow: 0 0 10px var(--player-color, var(--color-border-highlight-alt));
 }
 .taskbar-menu li .taskbar-menu-item {
 	align-items: center;

@@ -8,6 +8,7 @@ import './hooks.mjs';
 import './systems/dnd5e.mjs';
 import './systems/dsa5.mjs';
 
+CONFIG.debug.hooks = true;
 
 Hooks.on('init', async () => {
 	game.modules.get(Module.id).api = {
@@ -23,7 +24,7 @@ Hooks.on('init', async () => {
 	Hooks.callAll(`${Module.id}.Init`, game.modules.get(Module.id).api);
 });
 
-Hooks.once('ready', async () => {
+Hooks.once(`ready`, async (app, elem, options) => {
 	window.ViteTaskbar = await new VueAppTaskbar().render(true);
 	Hooks.callAll(`${Module.id}.Ready`, ViteTaskbar);
 });

@@ -307,7 +307,7 @@ const ShowChatOnCombat = async () => {
 	const ActiveCombats = (game.combats.filter(c => c.started)?.length ?? 0) > 0;
 	const elem = document.querySelector(`#app-${Module.id}`);
 
-	l.log('ShowChatOnCombat |', isShowChatOnCombat, ActiveCombats, (isShowChatOnCombat && ActiveCombats));
+	l.log('ShowChatOnCombat |', elem, isShowChatOnCombat, ActiveCombats, (isShowChatOnCombat && ActiveCombats));
 	if (elem) document.querySelector(`#app-${Module.id}`).setAttribute('data-sidebar-chat-autohide-combat', (isShowChatOnCombat && ActiveCombats));
 }
 
@@ -446,3 +446,4 @@ Hooks.on('updateSetting', async (data, diff, options, userId) => {
 Hooks.on('combatStart', ShowChatOnCombat);
 Hooks.on('deleteCombat', ShowChatOnCombat);
 Hooks.on('ready', ShowChatOnCombat);
+Hooks.on(`${Module.id}.Ready`, ShowChatOnCombat);

@@ -27,11 +27,11 @@ const updatePlayerColors = (user, update, details, userId) => {
 	createPlayerColors(user);
 
 	// If User has Character, Update --chat-form-message to be Message from Character Name
-	if (user.character !== null && user.id === game.user.id) {
+	/*if (user.character !== null && user.id === game.user.id) {
 		document.querySelector('#chat #chat-form').style.setProperty('--chat-form-message', `"${game.i18n.format(`${Module.id}.CHAT.Message.Character`, { name: user.character.name })}"`);
 	}else {
 		document.querySelector('#chat #chat-form').style.setProperty('--chat-form-message', `"${game.i18n.localize(`${Module.id}.CHAT.Message.Placeholder`)}"`);
-	}
+	}*/
 };
 
 const autoAdjustTextarea = (event) => {
@@ -64,6 +64,7 @@ onMounted(() => {
 	updatePlayerColors(game.user);
 
 	// Auto Adjust Textarea
+	l.log('Chat |', document.querySelector('#chat'))
 	document.querySelector('#chat #chat-form textarea').addEventListener('input', autoAdjustTextarea);
 	autoAdjustTextarea({ target: document.querySelector('#chat #chat-form textarea') });
 

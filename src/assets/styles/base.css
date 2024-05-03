@@ -32,5 +32,9 @@ html body {
 
 html body:has(#app-fvtt-artificer-ui[data-sidebar-enabled="true"]) {
 	--sidebar-width-collapsed: 50px;
+
+	#ui-top.offset {
+		margin-left: 0px;
+	}
 }
 
